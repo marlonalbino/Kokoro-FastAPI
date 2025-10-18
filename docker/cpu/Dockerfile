@@ -21,7 +21,13 @@ WORKDIR /app
 # Copy dependency files
 COPY --chown=appuser:appuser pyproject.toml ./pyproject.toml
 
-# Install dependencies with CPU extras
+# Install system-level build tools
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    && rm -rf /var/lib/apt/lists/*
+
+# Your existing command
 RUN uv venv --python 3.10 && \
     uv sync --extra cpu --no-cache
 
