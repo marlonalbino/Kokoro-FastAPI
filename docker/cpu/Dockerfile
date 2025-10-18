@@ -21,6 +21,7 @@ WORKDIR /app
 # Copy dependency files
 COPY --chown=appuser:appuser pyproject.toml ./pyproject.toml
 
+USER root
 # Install system-level build tools
 RUN apt-get update && apt-get install -y \
     build-essential \
